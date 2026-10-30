@@ -29,8 +29,13 @@ h1.gross{font-size:clamp(40px,7vw,86px);line-height:1.02;margin:.25em 0 .2em;fon
 section{padding:90px 0}section.dunkel{background:var(--bg2)}
 h2.titel{font-size:clamp(26px,3vw,38px);font-weight:300;letter-spacing:.06em;margin:0 0 10px}
 .unter{color:var(--leise);max-width:680px;margin:0 0 36px}
-.raster{columns:3 300px;column-gap:18px}
-.kachel{break-inside:avoid;margin:0 0 18px;position:relative;border-radius:14px;overflow:hidden;background:var(--karte);border:1px solid var(--linie)}
+.raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+.kachel{display:block;position:relative;border-radius:14px;overflow:hidden;background:var(--karte);border:1px solid var(--linie)}
+.raster .kachel img{aspect-ratio:3/2;object-fit:cover}
+.vorstellung{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:center;margin-bottom:46px}@media(max-width:900px){.vorstellung{grid-template-columns:1fr}}
+.vtitel{font-size:clamp(26px,3vw,36px);font-weight:300;margin:.25em 0 .2em;letter-spacing:.03em}.vtext{color:#d3dbe8;font-size:16.5px}
+nav.haupt a.sprache{border:1px solid var(--linie);border-radius:999px;padding:1px 10px;color:var(--gold2)}
+h3.klein{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;margin:18px 0 6px}
 .kachel img{width:100%;transition:transform .7s ease,filter .4s}.kachel:hover img{transform:scale(1.035);filter:brightness(1.08)}
 .kachel .info{position:absolute;inset:auto 0 0 0;padding:44px 16px 14px;background:linear-gradient(180deg,transparent,rgba(4,7,13,.92))}
 .kachel h3{margin:0;font-size:18px;font-weight:500;color:#fff}.kachel small{color:#b8c4d8;letter-spacing:.08em}
