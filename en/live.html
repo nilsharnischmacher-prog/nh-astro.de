@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Live – NH Astro</title><meta name="description" content="Deep-sky astrophotography from Münster and the High Atlas"><meta property="og:title" content="Live – NH Astro"><link rel="alternate" hreflang="de" href="https://nh-astro.de/live.html"><link rel="alternate" hreflang="en" href="https://nh-astro.de/en/live.html">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/stil.css"></head><body><div class="sterne"></div>
+<header class="top"><div class="wrap navbar"><a class="marke" href="/en/index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80" role="img" aria-label="NH Astro">
+<defs><linearGradient id="kup" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9c6ee"/><stop offset="1" stop-color="#5f86c4"/></linearGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d6b25e" stop-opacity="0"/><stop offset=".25" stop-color="#e6c77a"/><stop offset=".75" stop-color="#d6b25e"/><stop offset="1" stop-color="#d6b25e" stop-opacity="0"/></linearGradient></defs>
+<circle cx="60" cy="40" r="34" fill="#16233f" opacity=".55"/>
+<path d="M38 46 A22 22 0 0 1 82 46 Z" fill="url(#kup)"/><rect x="57" y="25" width="6" height="21" rx="1" fill="#0b1324" opacity=".85"/>
+<rect x="34" y="46" width="52" height="4" rx="1.5" fill="#7fa3d6"/>
+<path d="M6 62 Q60 40 114 62" fill="none" stroke="url(#gold)" stroke-width="3.2" stroke-linecap="round"/>
+<path d="M18 66 Q60 50 102 66" fill="none" stroke="#7fa3d6" stroke-width="1.2" opacity=".55" stroke-linecap="round"/></svg><span><b>NH</b> <span>ASTRO</span></span></a>
+<nav class="haupt"><a href="/en/galerie.html" class="">Gallery</a><a href="/en/sternwarten.html" class="">Observatories</a><a href="/en/ausruestung.html" class="">Equipment</a><a href="/en/live.html" class="akt">Live</a><a href="/en/ueber.html" class="">About</a><a class="sprache" href="/live.html" hreflang="de" lang="de" title="Deutsch">DE</a></nav><button class="menu" aria-label="Menu">☰</button></div></header>
+<section style="padding-top:130px"><div class="wrap"><div class="kicker">Münster · now</div><h2 class="titel">Live sky</h2>
+<p class="unter">Readings from the AAG CloudWatcher on the observatory roof and the latest all-sky camera frame. Updated every few minutes while the observatory is online.</p>
+<div class="zwei"><div class="karte" id="allskykarte"><img id="allsky" alt="All-Sky" style="border-radius:10px"></div>
+<div class="karte"><div class="kicker" style="margin-bottom:12px" id="quellkopf">AAG CloudWatcher</div><div class="live" id="werte"><p class="hinweis">Loading live data …</p></div><p class="hinweis" id="stand" style="margin-top:14px"></p></div></div></div></section>
+<section class="dunkel"><div class="wrap"><div class="kicker">Project Oukaimeden</div><h2 class="titel">Oukaïmeden · High Atlas</h2><p class="unter">Weather at the Oukaïmeden Observatory (model forecast) for the next hours.</p>
+<div class="zwei"><div class="karte"><div class="live" id="ouk"><p class="hinweis">Loading live data …</p></div></div>
+<div class="karte"><table class="daten" id="oukstd"></table><p class="hinweis" id="oukq" style="margin-top:12px"></p></div></div>
+<p class="hinweis" style="margin-top:22px">Live on site (external pages): <a href="https://hawkobs.space/" target="_blank" rel="noopener">All-Sky HAWK</a> ·
+<a href="https://www.astrosurf.com/rinner/MOSS-live.htm" target="_blank" rel="noopener">MOSS live – Wolken, Seeing, All-Sky (R. Rinner)</a></p></div></section>
+<script>(()=>{const T={"beob": "Observing weather", "ja": "yes", "nein": "no", "wolken": "Cloud sensor", "wolken_erkl": "sky minus air, °C – colder means clearer", "himmel": "Sky brightness", "temp": "Temperature", "feuchte": "Humidity", "taupunkt": "Dew point", "wind": "Wind", "regen": "Rain", "trocken": "dry", "nass": "rain", "druck": "Pressure", "stand": "Updated", "nicht_verfuegbar": "Live data is currently not available (observatory offline).", "allsky_folgt": "The all-sky image is currently not available.", "jetzt": "Now", "bewoelkung": "Cloud cover", "naechste": "Next hours (local time)", "zeit": "Time", "gesamt_w": "total", "tief": "low", "mittel": "mid", "hoch": "high", "quelle": "Source", "owm_kopf": "Weather in Münster (OpenWeatherMap)", "owm_hinweis": "The observatory's cloud sensor and all-sky camera are currently being serviced. Until then we show the weather in Münster from OpenWeatherMap.", "wolken_p": "Cloud cover"};const Q='https://raw.githubusercontent.com/nilsharnischmacher-prog/nh-astro.de/live/';const z=v=>(v===null||v===undefined)?'–':(''+(Math.round(v*10)/10)).replace('.','.');
+const a=document.getElementById('allsky');a.onerror=()=>a.replaceWith(Object.assign(document.createElement('p'),{className:'hinweis',textContent:T.allsky_folgt}));a.src=Q+'allsky.jpg?'+Date.now();
+fetch(Q+'wetter.json?'+Date.now()).then(r=>r.json()).then(d=>{const k=(t,v,e,h)=>`<div><div class="hinweis">${t}</div><div class="wert">${v}<small> ${e||''}</small></div>${h?`<div class="hinweis" style="font-size:12px">${h}</div>`:''}</div>`;
+if(d.quelle==='owm'){if(d.allsky===false)document.getElementById('allskykarte').innerHTML='<p class="hinweis">'+T.owm_hinweis+'</p>';document.getElementById('quellkopf').textContent=T.owm_kopf;const o=d.owm||{};
+document.getElementById('werte').innerHTML=o.zeit_utc?k(T.wolken_p,z(o.wolken_prozent),'%')+k(T.temp,z(o.temperatur),'°C')+k(T.feuchte,z(o.feuchte),'%')+k(T.taupunkt,z(o.taupunkt),'°C')+k(T.wind,z(o.wind),'km/h')+k(T.regen,o.regen?T.nass:T.trocken)+k(T.druck,z(o.druck),'hPa'):'<p class="hinweis">'+T.nicht_verfuegbar+'</p>';
+document.getElementById('stand').innerHTML=T.quelle+': <a href="https://openweathermap.org/" target="_blank" rel="noopener">OpenWeatherMap</a> · '+T.stand+': '+(o.zeit_utc||'')+' UTC';}else{
+document.getElementById('werte').innerHTML=k(T.beob,d.gesamt_sicher?T.ja:T.nein)+k(T.wolken,z(d.wolken),'°C',T.wolken_erkl)+k(T.himmel,z(d.himmel_mag),'mag/″²')+k(T.temp,z(d.temperatur),'°C')
++k(T.feuchte,z(d.feuchte),'%')+k(T.taupunkt,z(d.taupunkt),'°C')+k(T.wind,z(d.wind),'km/h')+k(T.regen,d.regen_sicher?T.trocken:T.nass)+k(T.druck,z(d.druck),'hPa');
+document.getElementById('stand').textContent=T.stand+': '+(d.zeit_utc||'')+' UTC';}
+const o=d.oukaimeden;if(o){document.getElementById('ouk').innerHTML=k(T.jetzt,z(o.temperatur),'°C')+k(T.bewoelkung,z(o.wolken),'%')+k(T.feuchte,z(o.feuchte),'%')+k(T.wind,z(o.wind),'km/h');
+document.getElementById('oukstd').innerHTML=`<tr><th>${T.zeit}</th><th>${T.gesamt_w}</th><th>${T.tief}</th><th>${T.mittel}</th><th>${T.hoch}</th><th>${T.wind}</th></tr>`+
+o.stunden.map(s=>`<tr><td>${s.zeit}</td><td>${s.wolken} %</td><td>${s.tief} %</td><td>${s.mittel} %</td><td>${s.hoch} %</td><td>${z(s.wind)}</td></tr>`).join('');
+document.getElementById('oukq').innerHTML=T.quelle+': <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (CC BY 4.0) · '+T.stand+': '+(o.zeit_ortszeit||'').replace('T',' ');}}).catch(()=>{document.getElementById('werte').innerHTML='<p class="hinweis">'+T.nicht_verfuegbar+'</p>'});})();</script>
+<footer><div class="wrap reihe"><div><span class="marke" style="font-size:13px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80" role="img" aria-label="NH Astro">
+<defs><linearGradient id="kup" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9c6ee"/><stop offset="1" stop-color="#5f86c4"/></linearGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d6b25e" stop-opacity="0"/><stop offset=".25" stop-color="#e6c77a"/><stop offset=".75" stop-color="#d6b25e"/><stop offset="1" stop-color="#d6b25e" stop-opacity="0"/></linearGradient></defs>
+<circle cx="60" cy="40" r="34" fill="#16233f" opacity=".55"/>
+<path d="M38 46 A22 22 0 0 1 82 46 Z" fill="url(#kup)"/><rect x="57" y="25" width="6" height="21" rx="1" fill="#0b1324" opacity=".85"/>
+<rect x="34" y="46" width="52" height="4" rx="1.5" fill="#7fa3d6"/>
+<path d="M6 62 Q60 40 114 62" fill="none" stroke="url(#gold)" stroke-width="3.2" stroke-linecap="round"/>
+<path d="M18 66 Q60 50 102 66" fill="none" stroke="#7fa3d6" stroke-width="1.2" opacity=".55" stroke-linecap="round"/></svg><span><b>NH</b> <span>ASTRO</span></span></span>
+<div style="margin-top:8px">© 2026 NH Astro · All images are protected by copyright</div></div>
+<div style="display:flex;gap:20px;flex-wrap:wrap"><a href="https://app.astrobin.com/u/nh.astro" target="_blank" rel="noopener">AstroBin</a><a href="https://www.instagram.com/nh.astro.de/" target="_blank" rel="noopener">Instagram</a><a href="mailto:nils.harnischmacher@web.de">nils.harnischmacher@web.de</a><a href="/en/impressum.html">Legal notice</a><a href="/en/datenschutz.html">Privacy</a></div></div></footer>
+<div class="leuchte"><img alt=""></div><script src="/assets/app.js"></script></body></html>
